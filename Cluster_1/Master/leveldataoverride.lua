@@ -1,13 +1,12 @@
 return {
-  ["desc"]="标准《饥荒》体验。",
+  ["desc"]="A pleasing blend of forest and caves",
   ["hideminimap"]=false,
-  id="SURVIVAL_TOGETHER",
+  id="INFUSED",
   ["location"]="forest",
   ["max_playlist_position"]=999,
   ["min_playlist_position"]=0,
-  ["name"]="默认",
-  ["numrandom_set_pieces"]=4,
-  ["ordered_story_setpieces"]={ "Sculptures_1", "Maxwell5" },
+  ["name"]="Infused",
+  ["numrandom_set_pieces"]=0,
   ["override_level_string"]=false,
   ["overrides"]={
     ["alternatehunt"]="default",
@@ -74,7 +73,7 @@ return {
     ["start_location"]="default",
     ["summer"]="default",
     ["tallbirds"]="default",
-    ["task_set"]="default",
+    ["task_set"]="infused",
     ["tentacles"]="default",
     ["touchstone"]="default",
     ["trees"]="default",
@@ -86,28 +85,7 @@ return {
     ["world_size"]="default",
     ["wormhole_prefab"]="wormhole" 
   },
-  ["random_set_pieces"]={
-    "Sculptures_2",
-    "Sculptures_3",
-    "Sculptures_4",
-    "Sculptures_5",
-    "Chessy_1",
-    "Chessy_2",
-    "Chessy_3",
-    "Chessy_4",
-    "Chessy_5",
-    "Chessy_6",
-    "Maxwell1",
-    "Maxwell2",
-    "Maxwell3",
-    "Maxwell4",
-    "Maxwell6",
-    "Maxwell7",
-    "Warzone_1",
-    "Warzone_2",
-    "Warzone_3" 
-  },
   ["required_prefabs"]={ "multiplayer_portal" },
   ["substitutes"]={  },
-  ["version"]=3 
+  ["version"]=2 
 }
