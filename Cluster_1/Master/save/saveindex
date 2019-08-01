@@ -5,19 +5,19 @@ KLEI     1 return {
       enabled_mods={  },
       server={
         clan={ admin=false, id="", only=false },
-        description="",
+        description="闲人免进",
         encode_user_path=true,
         game_mode="survival",
         intention="cooperative",
         max_players=6,
         name="维吉尔゜的世界",
         online_mode=true,
-        password="",
+        password="159357",
         privacy_type=0,
         pvp=false,
         server_language="zh" 
       },
-      session_id="239215B7BD7AAE61",
+      session_id="3D304C57D7624BF3",
       world={
         options={
           {
@@ -43,7 +43,7 @@ KLEI     1 return {
               berrybush="default",
               birds="default",
               boons="default",
-              branching="default",
+              branching="most",
               butterfly="default",
               buzzard="default",
               cactus="default",
@@ -98,7 +98,7 @@ KLEI     1 return {
               tallbirds="default",
               task_set="default",
               tentacles="default",
-              touchstone="often",
+              touchstone="default",
               trees="default",
               tumbleweed="default",
               walrus="default",
