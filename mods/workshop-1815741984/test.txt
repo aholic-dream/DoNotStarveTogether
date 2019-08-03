@@ -1,0 +1,59 @@
+这只是一个临时性的版本。
+它兼容于最新的测试版【DoNotStarveTogetherReturnOfThemBeta】
+为了使它能够正常运行，
+我试着检查错误日志，并删除了相关的组件。
+
+删除了的是【威尔逊】和 【瓦丝格雷斯】这两个组件 。
+当作者修复MOD代码并且更新时，我会删除此MOD。
+
+警告：不要在MOD设置当中开启威尔逊、尽量不要试着更换外观，它们都极有可能导致崩溃！
+似乎不兼容魔理沙MOD，是否存在其他的兼容性问题，我也不能确定。
+
+最近的更新正常的修复了农场的问题，（感谢大佬的技术支持！我会在稍后添加贡献者的ID。）
+单独的使用musha并不会导致内存溢出，但是如果遇到了兼容性的问题，就会很容易发生内存溢出的问题。
+举个具体的例子，SW+Musha容易导致回档崩溃，返回到以前的存档不会导致存档被损坏、游戏过程中可能会遇到丢失图像的问题，都建议重启游戏或者是重启电脑。
+
+但我们还有一些问题没有得到改善，衣服【冬暖夏凉】的功能组件发生了问题，它有可能会导致崩溃。
+如果我们能修复得了这个问题，预期内还能再更新一次。
+
+我暂时没有发现其他的错误，如果还有问题，请告诉我。
+--------------------------------------------------------------------------------------------------------------
+
+This is only a temporary version.
+It is compatible with the latest beta [DoNotStarveTogetherReturnOfThemBeta]
+And to keep it running,
+
+I tried to check his code for errors and violently deleted those components.
+I removed the [Wilson] and [wathgrithr] components.
+But I still don't know about the other code errors.
+
+Warning: Do not enable Wilson in MOD Settings. it is highly likely to cause a crash!
+It doesn't seem to be compatible with the marisa Kirisame MOD. I'm not sure if there are other compatibility issues.
+
+And I couldn't do more to help.
+When the author fixes the MOD code and updates【musha】, I will delete it.
+From machine translation.
+
+原作者mod：https://steamcommunity.com/sharedfiles/filedetails/?id=439115156&searchtext=musha
+-------------------------------------------------------------------------------------------------------------------------------------------
+Update log：
+
+New updates fix farm problems（Thanks for his technical support! I'll add contributor ids later on steam.）
+Musha alone does not make the computer run out of memory,
+I suggest you first check to see if there are compatibility issues.
+
+If you return the last archive often, your computer will run out of memory.
+But returning to the previous archive does not cause the archive to be corrupted.
+My advice, though, is to reboot your computer when you're done.
+
+When will this bug be fixed?
+Only Sunnyyyyholic can fix it.
+I don't find any other mistakes. If there are any problems, please let me know.
+
+A new message！
+We're trying to solve the next problem,
+Musha's armor tends to crash the computer's memory in the summer.
+（Well, I don't know how to translate it, this is a problem related to temperature. Don't overrely on your armor in the summer.）
+
+If we can fix it, we will try to do it. 
+------------------------------------------------------------
