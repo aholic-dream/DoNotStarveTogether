@@ -1,0 +1,8 @@
+[00:00:40]: [Join Announcement] overall_trend
+[00:00:42]: [System Message] HSR"3162496258",1,"GemCore",1,"3162496258",{tags={"cave"}}
+[00:01:06]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[00:04:52]: [Join Announcement] yu2436
+[00:06:58]: [Join Announcement] 维吉尔゜
+[00:12:38]: [Death Announcement] overall_trend 被此人杀死： 爬行暗影怪. 他变成了可怕的鬼魂！
+[00:14:08]: [Join Announcement] 2831483516
+[00:15:50]: [Leave Announcement] overall_trend

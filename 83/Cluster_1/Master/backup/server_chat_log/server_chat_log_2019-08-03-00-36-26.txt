@@ -1,0 +1,30 @@
+[00:00:34]: [Join Announcement] overall_trend
+[00:00:36]: [System Message] HSR"3162496258",1,"GemCore",1,"3162496258",{tags={"cave"}}
+[00:00:40]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[00:15:27]: [Join Announcement] 维吉尔゜
+[00:15:54]: [Join Announcement] yu2436
+[00:22:41]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[00:27:46]: [Join Announcement] 2831483516
+[00:29:29]: [Skin Announcement] 维吉尔゜ legs_tweed_knickerbocker_green_hunters
+[00:41:13]: [Leave Announcement] 维吉尔゜
+[00:43:06]: [Skin Announcement] yu2436 feet_captoe_shoe_brown_beaver
+[00:43:17]: [Join Announcement] 维吉尔゜
+[00:45:48]: [Death Announcement] 2831483516 被此人杀死： 爬行暗影怪. 她变成了可怕的鬼魂！
+[00:46:02]: [Resurrect Announcement] 2831483516 被此人复活： 复活石.
+[00:53:37]: [Death Announcement] 2831483516 被此人杀死： 黑暗. 她变成了可怕的鬼魂！
+[00:54:49]: [Resurrect Announcement] 2831483516 被此人复活： yu2436.
+[01:46:02]: [Skin Announcement] 维吉尔゜ legs_skirt_basic_green_leaf
+[01:49:04]: [Skin Announcement] 2831483516 body_tweedvest_blue_lightning
+[01:52:22]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[01:58:31]: [Skin Announcement] yu2436 hand_wickerbottom_ice
+[02:02:30]: [Skin Announcement] overall_trend legs_skirt_basic_tan_cream
+[02:07:09]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[02:10:40]: [Death Announcement] 2831483516 被此人杀死： 怪物肉. 她变成了可怕的鬼魂！
+[02:13:57]: [Resurrect Announcement] 2831483516 被此人复活： yu2436.
+[02:40:21]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[02:41:15]: [Leave Announcement] 2831483516
+[02:41:16]: [Leave Announcement] 维吉尔゜
+[02:41:16]: [Leave Announcement] yu2436
+[02:41:32]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[02:42:08]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[02:42:12]: [Leave Announcement] overall_trend

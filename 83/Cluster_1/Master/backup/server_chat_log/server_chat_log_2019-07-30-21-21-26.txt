@@ -1,0 +1,2 @@
+[00:00:39]: [Join Announcement] overall_trend
+[00:03:09]: [Leave Announcement] overall_trend

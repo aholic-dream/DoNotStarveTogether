@@ -1,0 +1,11 @@
+[00:00:31]: [Join Announcement] overall_trend
+[00:03:36]: [Join Announcement] 维吉尔゜
+[00:04:16]: [Join Announcement] yu2436
+[00:04:24]: [Death Announcement] 维吉尔゜ 被此人杀死： 蜘蛛. 他变成了可怕的鬼魂！
+[00:07:09]: [Resurrect Announcement] 维吉尔゜ 被此人复活： 复活石.
+[00:08:13]: [Leave Announcement] 维吉尔゜
+[00:10:57]: [Join Announcement] 维吉尔゜
+[01:11:14]: [Leave Announcement] yu2436
+[01:11:15]: [Leave Announcement] 维吉尔゜
+[01:11:27]: [Vote Announcement] rollback passed
+[01:12:15]: [Leave Announcement] overall_trend

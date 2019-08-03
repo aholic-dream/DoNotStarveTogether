@@ -1,0 +1,4 @@
+[00:00:58]: [Join Announcement] overall_trend
+[00:01:00]: [System Message] HSR"3162496258",1,"GemCore",1,"3162496258",{tags={"cave"}}
+[00:01:05]: [System Message] HSR"3162496258",1,"GlobalPause",1
+[00:05:54]: [Leave Announcement] overall_trend

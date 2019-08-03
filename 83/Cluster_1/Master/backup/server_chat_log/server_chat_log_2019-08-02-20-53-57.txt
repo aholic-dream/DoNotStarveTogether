@@ -1,0 +1,79 @@
+[00:00:34]: [Join Announcement] overall_trend
+[00:02:36]: [Join Announcement] 维吉尔゜
+[00:02:42]: [Join Announcement] yu2436
+[00:03:03]: [Say] (KU_qCOtoeC0) yu2436: 30 31
+[00:03:07]: [Leave Announcement] 维吉尔゜
+[00:04:01]: [Say] (KU_qCOtoeC0) yu2436: 石头
+[00:04:49]: [Join Announcement] 维吉尔゜
+[00:11:34]: [Say] (KU_qCOtoeC0) yu2436: 120花
+[00:14:57]: [Say] (KU_qCOtoeC0) yu2436: 对
+[00:15:15]: [Say] (KU_qCOtoeC0) yu2436: 要找到 鹿
+[00:15:36]: [Say] (KU_qCOtoeC0) yu2436: 鹿头上有钥匙
+[00:15:48]: [Say] (KU_qCOtoeC0) yu2436: yy
+[00:16:52]: [Say] (KU_qCOtoeC0) yu2436: 用完了
+[00:18:18]: [Say] (KU_qCOtoeC0) yu2436: 来拿花
+[00:22:02]: [Say] (KU_qCOtoeC0) yu2436: 缝纫包 给我用下
+[00:22:15]: [Say] (KU_qCOtoeC0) yu2436: 别挖了 以后 我可以读书
+[00:23:02]: [Say] (KU_qCOtoeC0) yu2436: 农场  猪圈  齿轮
+[00:23:11]: [Say] (KU_qCOtoeC0) yu2436: 冬天不长的
+[00:24:34]: [Say] (KU_qCOtoeC0) yu2436: 腐烂的食物 留着
+[00:24:50]: [Say] (KU_qCOtoeC0) yu2436: 给我
+[00:25:01]: [Say] (KU_qCOtoeC0) yu2436: 蘑菇农场 要用哪个
+[00:26:14]: [Say] (KU_qCOtoeC0) yu2436: 猪皮 在哪
+[00:27:12]: [Say] (KU_qCOtoeC0) yu2436: 我到家里 弄个 猪人房你就不要出去了
+[00:33:02]: [Say] (KU_qCOtoeC0) yu2436: 草没了
+[00:33:32]: [Say] (KU_qCOtoeC0) yu2436: 草
+[00:34:21]: [Say] (KU_qCOtoeC0) yu2436: 没草了
+[00:34:49]: [Say] (KU_qCOtoeC0) yu2436: 杀蜘蛛去
+[00:37:50]: [Say] (KU_qCOtoeC0) yu2436: 明天 杀蜘蛛 拿草
+[00:38:10]: [Say] (KU_qCOtoeC0) yu2436: 拿帽子
+[00:39:47]: [Say] (KU_qCOtoeC0) yu2436: 走  杀蜘蛛去
+[00:39:58]: [Say] (KU_qCOtoeC0) yu2436: y
+[00:43:02]: [Say] (KU_qCOtoeC0) yu2436: yes
+[00:43:53]: [Say] (KU_qCOtoeC0) yu2436: 草
+[00:44:26]: [Say] (KU_qCOtoeC0) yu2436: 冬天不长
+[00:44:33]: [Say] (KU_qCOtoeC0) yu2436: 没有草
+[00:44:46]: [Say] (KU_qCOtoeC0) yu2436: 走路去 杀蜘蛛吧
+[00:45:44]: [Say] (KU_qCOtoeC0) yu2436: genwo  zou
+[00:46:13]: [Say] (KU_qCOtoeC0) yu2436: 走啊
+[00:47:03]: [Say] (KU_qCOtoeC0) yu2436: !!!!
+[00:50:45]: [Say] (KU_qCOtoeC0) yu2436: 巢穴呢
+[00:51:16]: [Say] (KU_qCOtoeC0) yu2436: 走
+[00:53:40]: [Say] (KU_qCOtoeC0) yu2436: 棒子
+[00:54:12]: [Say] (KU_qCOtoeC0) yu2436: 网可以给我
+[00:54:37]: [Say] (KU_qCOtoeC0) yu2436: 没草了家里
+[00:56:47]: [Say] (KU_qCOtoeC0) yu2436: 战斗
+[00:58:33]: [Say] (KU_qCOtoeC0) yu2436: 风滚草 去？
+[00:59:17]: [Say] (KU_qCOtoeC0) yu2436: 9
+[01:04:05]: [Say] (KU_qCOtoeC0) yu2436: boss呢
+[01:06:04]: [Death Announcement] yu2436 被此人杀死： 猎犬. 她变成了可怕的鬼魂！
+[01:06:19]: [Say] (KU_qCOtoeC0) yu2436: yy
+[01:06:23]: [Say] (KU_qCOtoeC0) yu2436: y
+[01:06:42]: [Resurrect Announcement] yu2436 被此人复活： 复活石.
+[01:09:15]: [Say] (KU_qCOtoeC0) yu2436: 我跑不赢 boss
+[01:09:46]: [Say] (KU_qCOtoeC0) yu2436: 跳过来
+[01:09:57]: [Say] (KU_qCOtoeC0) yu2436: 我这边有 火
+[01:10:08]: [Say] (KU_qCOtoeC0) yu2436: 我的帽子给泄赵伟 了
+[01:13:06]: [Say] (KU_qCOtoeC0) yu2436: 挖冰！！1
+[01:16:50]: [Say] (KU_qCOtoeC0) yu2436: 回血 别用！
+[01:16:59]: [Say] (KU_qCOtoeC0) yu2436: 回脑残再用
+[01:17:19]: [Say] (KU_qCOtoeC0) yu2436: 那个不回
+[01:22:42]: [Say] (KU_qCOtoeC0) yu2436: 没齿轮咋办啊
+[01:23:51]: [Say] (KU_qCOtoeC0) yu2436: 打齿轮去  要8个  这么大的家
+[01:25:26]: [Say] (KU_qCOtoeC0) yu2436: 走！
+[01:25:38]: [Say] (KU_qCOtoeC0) yu2436: boss
+[01:25:44]: [Say] (KU_qCOtoeC0) yu2436: lai  l
+[01:26:16]: [Whisper] (KU_qCOtoeC0) yu2436: 猪皮呢
+[01:26:32]: [Say] (KU_qCOtoeC0) yu2436: 之前十几个的啊
+[01:27:15]: [Say] (KU_qCOtoeC0) yu2436: 我以为boss lai l
+[01:27:37]: [Say] (KU_qCOtoeC0) yu2436: 一起去齿轮啊
+[01:29:12]: [Say] (KU_qCOtoeC0) yu2436: 在了吃肉！
+[01:29:19]: [Say] (KU_qCOtoeC0) yu2436: 宰了吃肉
+[01:29:31]: [Say] (KU_qCOtoeC0) yu2436: 肉感
+[01:29:48]: [Say] (KU_qCOtoeC0) yu2436: 来个人  去齿轮啊
+[01:36:12]: [Say] (KU_qCOtoeC0) yu2436: 走开
+[01:37:25]: [Say] (KU_qCOtoeC0) yu2436: 我要被你搞死
+[01:37:49]: [Leave Announcement] 维吉尔゜
+[01:37:56]: [Vote Announcement] rollback passed
+[01:37:57]: [Leave Announcement] yu2436
+[01:40:08]: [Leave Announcement] overall_trend
