@@ -2,9 +2,10 @@
 name = "Smart Minisign"
 description = [[Can draw by itself
 会自己画画的小木牌 
+v1.10 兼容盐箱(SaltBox)
 v1.08 兼容mod物品 提供了一个API 允许其他mod调用]]
 author = "小班花 mamjun1"
-version = "1.0.8" 
+version = "1.1.3" 
 
 forumthread = ""
 
@@ -12,7 +13,6 @@ api_version = 10
 priority = -99999 
 
 dst_compatible = true
-
 
 dont_starve_compatible = false
 reign_of_giants_compatible = false
@@ -39,6 +39,17 @@ configuration_options =
         name = "DragonflyChest",
         label = "DragonflyChest",
         hover = "Minisign for DragonflyChest/允许龙鳞箱子添加小木牌",
+        options = 
+        {
+            {description = "No(关闭)", data = false},
+            {description = "Yes(打开)", data = true},
+        },
+        default = false,
+    },
+    {
+        name = "SaltBox",
+        label = "SaltBox",
+        hover = "Minisign for SaltBox/允许盐箱添加小木牌",
         options = 
         {
             {description = "No(关闭)", data = false},

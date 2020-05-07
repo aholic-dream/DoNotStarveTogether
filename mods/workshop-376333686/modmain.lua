@@ -88,6 +88,10 @@ local Badge = require("widgets/badge")
 
 local badges = {}
 local function BadgePostConstruct(self)
+	if self.active == nil then
+		self.active = true
+	end
+	
 	self:SetScale(.9,.9,.9)
 	-- Make sure that badge scaling animations are adjusted accordingly (e.g. WX's upgrade animation)
 	local _ScaleTo = self.ScaleTo
@@ -107,7 +111,9 @@ local function BadgePostConstruct(self)
 	self.num:SetScale(1,.78,1)
 
 	self.num:MoveToFront()
-	self.num:Show()
+	if self.active then
+		self.num:Show()
+	end
 
 	badges[self] = self
 	self.maxnum = self:AddChild(Text(GLOBAL.NUMBERFONT, SHOWMAXONNUMBERS and 25 or 33))
@@ -118,27 +124,37 @@ local function BadgePostConstruct(self)
 	local OldOnGainFocus = self.OnGainFocus
 	function self:OnGainFocus()
 		OldOnGainFocus(self)
-		self.maxnum:Show()
+		if self.active then
+			self.maxnum:Show()
+		end
 	end
 
 	local OldOnLoseFocus = self.OnLoseFocus
 	function self:OnLoseFocus()
 		OldOnLoseFocus(self)
 		self.maxnum:Hide()
-		self.num:Show()
+		if self.active then
+			self.num:Show()
+		end
+	end
+	
+	local maxtxt = SHOWMAXONNUMBERS and "Max:\n" or ""
+	function self:CombinedStatusUpdateNumbers(max)
+		-- avoid updating numbers on hidden badges
+		if not self.active then return end
+		local maxnum_str = tostring(math.ceil(max or 100))
+		self.maxnum:SetString(maxtxt..maxnum_str)
+		if SHOWDETAILEDSTATNUMBERS then
+			self.num:SetString(self.num:GetString().."/"..maxnum_str)
+		end
 	end
 	
 	-- for health/hunger/sanity/beaverness
-	local maxtxt = SHOWMAXONNUMBERS and "Max:\n" or ""
 	local OldSetPercent = self.SetPercent
 	if OldSetPercent then
 		function self:SetPercent(val, max, ...)
-			local maxnum_str = tostring(math.ceil(max or 100))
-			self.maxnum:SetString(maxtxt..maxnum_str)
 			OldSetPercent(self, val, max, ...)
-			if SHOWDETAILEDSTATNUMBERS then
-				self.num:SetString(self.num:GetString().."/"..maxnum_str)
-			end
+			self:CombinedStatusUpdateNumbers(max)
 		end
 	end
 	
@@ -146,14 +162,19 @@ local function BadgePostConstruct(self)
 	local OldSetValue = self.SetValue
 	if OldSetValue then
 		function self:SetValue(val, max, ...)
-			self.maxnum:SetString(maxtxt..tostring(math.ceil(max)))
 			OldSetValue(self, val, max, ...)
-			if SHOWDETAILEDSTATNUMBERS and val > 0 then
-				self.num:SetString(self.num:GetString().."/"..max)
-			end
+			self:CombinedStatusUpdateNumbers(max)
 		end
 	end
-
+	
+	-- for boatmeter in DST
+	local OldRefreshHealth = self.RefreshHealth
+	if OldRefreshHealth then
+		function self:RefreshHealth(...)
+			OldRefreshHealth(self, ...)
+			self:CombinedStatusUpdateNumbers(self.boat.components.healthsyncer.max_health)
+		end
+	end
 end
 AddClassPostConstruct("widgets/badge", BadgePostConstruct)
 
@@ -172,6 +193,27 @@ if (CSW or HML or HAS_MOD.TROPICAL) and SHOWSTATNUMBERS then
 	AddPrefabPostInit("world", function()
 		AddClassPostConstruct("widgets/boatbadge", BoatBadgePostConstruct)
 	end)
+end
+local function BoatMeterPostConstruct(self)
+	self.active = false
+	BadgePostConstruct(self)
+	self.inst:ListenForEvent("open_meter", function()
+		self.active = true
+		self.bg:Show()
+		self.num:Show()
+	end)
+	self.inst:ListenForEvent("close_meter", function()
+		self.active = false
+		self.bg:Hide()
+		self.num:Hide()
+	end)
+	if self.boat == nil then
+		self.bg:Hide()
+		self.num:Hide()
+	end
+end
+if DST and SHOWSTATNUMBERS then
+	AddClassPostConstruct("widgets/boatmeter", BoatMeterPostConstruct)
 end
 
 local function MoistureMeterPostConstruct(self)
@@ -308,42 +350,44 @@ local function AddSeasonBadge(self)
 		self.inst:ListenForEvent("cycleschanged", function() UpdateText() end, GLOBAL.TheWorld)
 		self.inst:ListenForEvent("seasonlengthschanged", function() UpdateText() end, GLOBAL.TheWorld)
 	else
-		self.inst:ListenForEvent("daycomplete", function() UpdateText() end, GLOBAL.GetWorld())
+		self.inst:ListenForEvent("daycomplete", function() self.inst:DoTaskInTime(0, function() UpdateText() end) end, GLOBAL.GetWorld())
 		self.inst:ListenForEvent("seasonChange", function() UpdateText() end, GLOBAL.GetWorld())
 	end
 	UpdateText()
 end
 
 local function ControlsPostConstruct(self)
-	if not HAS_MOD.CHINESE then
-		if self.clock.text_upper then --should only be in Shipwrecked(-compatible) worlds
-			self.clock.text_upper:SetScale(.8, .8, 0)
-			self.clock.text_lower:SetScale(.8, .8, 0)
-		else
-			local text = DST and "_text" or "text"
-			self.clock[text]:SetPosition(5, 0)
-			self.clock[text]:SetScale(.8, .8, 0)
+	if self.clock then
+		if not HAS_MOD.CHINESE then
+			if self.clock.text_upper then --should only be in Shipwrecked(-compatible) worlds
+				self.clock.text_upper:SetScale(.8, .8, 0)
+				self.clock.text_lower:SetScale(.8, .8, 0)
+			else
+				local text = DST and "_text" or "text"
+				self.clock[text]:SetPosition(5, 0)
+				self.clock[text]:SetScale(.8, .8, 0)
+			end
 		end
-	end
-	if SHOWSEASONCLOCK then
-		self.seasonclock = self.sidepanel:AddChild(GLOBAL.require("widgets/seasonclock")(self.owner, DST, FindSeasonTransitions, SHOWCLOCKTEXT, HAS_MOD.CHINESE))
-		self.seasonclock:SetPosition(50, 10)
-		self.seasonclock:SetScale(0.8, 0.8, 0.8)
-		self.clock:SetPosition(-50, 10)
-		self.clock:SetScale(0.8, 0.8, 0.8)
-	elseif MICROSEASONS then
-		AddSeasonBadge(self)
+		if SHOWSEASONCLOCK then
+			self.seasonclock = self.sidepanel:AddChild(GLOBAL.require("widgets/seasonclock")(self.owner, DST, FindSeasonTransitions, SHOWCLOCKTEXT, HAS_MOD.CHINESE))
+			self.seasonclock:SetPosition(50, 10)
+			self.seasonclock:SetScale(0.8, 0.8, 0.8)
+			self.clock:SetPosition(-50, 10)
+			self.clock:SetScale(0.8, 0.8, 0.8)
+		elseif MICROSEASONS then
+			AddSeasonBadge(self)
+		end
+		
+		if not DST and GLOBAL.GetWorld():IsCave() then
+			if not HIDECAVECLOCK then
+				self.clock:Show()
+			end
+			self.status:SetPosition(0, -110)
+		end
 	end
 	
 	self.sidepanel:SetPosition(-100, -70)
 	
-	if not DST and GLOBAL.GetWorld():IsCave() then
-		if not HIDECAVECLOCK then
-			self.clock:Show()
-		end
-		self.status:SetPosition(0, -110)
-	end
-		
 	local _SetHUDSize = self.SetHUDSize
 	function self:SetHUDSize()
 		_SetHUDSize(self)
@@ -357,8 +401,12 @@ local function ControlsPostConstruct(self)
 	_ShowStatusNumbers = statusholder.ShowStatusNumbers
 	function statusholder:ShowStatusNumbers(...)
 		_ShowStatusNumbers(self, ...)
+		-- Fix for https://forums.kleientertainment.com/klei-bug-tracker/dont-starve-together-return-of-them/with-controller-after-drying-off-a-floating-1-shows-for-moisture-r24283/
+		if self.moisturemeter and not self.moisturemeter.active then
+			self.moisturemeter.num:Hide()
+		end
 		for _,badge in pairs(badges) do
-			if badge and badge.maxnum then
+			if badge and badge.maxnum and badge.active then
 				badge.maxnum:Show()
 			end
 		end
@@ -499,6 +547,7 @@ local function StatusPostConstruct(self)
 	if COMPACTSEASONS then AddSeasonBadge(self) end
 	
 	if DST then
+		--Note this is deprecated now in DST but might as well keep it for backwards-compatibility.
 		--DST-only functions for Beaverness
 		local OldAddBeaverness = self.AddBeaverness
 		self.AddBeaverness = function(self, ...)
@@ -535,6 +584,16 @@ local function StatusPostConstruct(self)
 			self.beaverbadge:Show()
 		end, self.owner)
 		self.owner.components.beaverness:DoDelta(0, true)
+	end
+	
+	local _boatx = -62
+	if self.pethealthbadge then
+		_boatx = _boatx - 62
+		self.pethealthbadge:SetPosition(-62, -52)
+	end
+	
+	if self.boatmeter then
+		self.boatmeter:SetPosition(_boatx, -52)
 	end
 		
 	-- Puppy Princess Musha badge fix
@@ -574,7 +633,30 @@ local function ProxyWorldClockDay()
 	end
 end
 
-local has_modified_text = false
+-- Only run this in Vanilla and RoG (DST already records these)
+if not SHOWCLOCKTEXT and not (DST or CSW or HML)then
+	local function RecordTextWidgetFontAndSize()
+		-- Need to make font and size available for UIClockPostInit below
+		_Text_SetFont = Text.SetFont
+		function Text:SetFont(font, ...)
+			_Text_SetFont(self, font, ...)
+			self.font = font
+		end
+		_Text_SetSize = Text.SetSize
+		function Text:SetSize(size, ...)
+			_Text_SetSize(self, size, ...)
+			self.size = size
+		end
+		_Text_ctor = Text._ctor
+		function Text:_ctor(font, size, ...)
+			_Text_ctor(self, font, size, ...)
+			self.font = font
+			self.size = size
+		end
+	end
+	-- Run it after World init so it doesn't run on menus, but runs before UIClock's constructor
+	AddPrefabPostInit("world", RecordTextWidgetFontAndSize)
+end
 
 local function UIClockPostInit(self)
 	if not SHOWCLOCKTEXT then
@@ -608,30 +690,6 @@ local function UIClockPostInit(self)
 			-- In Vanilla, RoG, and DST we need something fancier
 			-- Change UpdateDayString and UpdateWorldString to write to a fake invisible Text,
 			-- so we can capture the output strings to assemble the one we want
-			if not has_modified_text then
-				-- guard this with a lock to prevent multi-modification
-				-- also delay this modification until UIClockPostInit to ensure it doesn't run on the menus
-				has_modified_text = true 
-				if not DST then
-					-- Need to make font and size available
-					_Text_SetFont = Text.SetFont
-					function Text:SetFont(font, ...)
-						_Text_SetFont(self, font, ...)
-						self.font = font
-					end
-					_Text_SetSize = Text.SetSize
-					function Text:SetSize(size, ...)
-						_Text_SetSize(self, size, ...)
-						self.size = size
-					end
-					_Text_ctor = Text._ctor
-					function Text:_ctor(font, size, ...)
-						_Text_ctor(self, font, size, ...)
-						self.font = font
-						self.size = size
-					end
-				end
-			end
 			local text = DST and "_text" or "text"
 			local text_proxy = Text(self[text].font, self[text].size)
 			local day_text = ""
@@ -937,7 +995,7 @@ function PlayerHud:OpenControllerInventory(...)
 	if self.controls.clock then
 		self.controls.clock:OnGainFocus()
 	end
-	if SHOWSEASONCLOCK then
+	if SHOWSEASONCLOCK and self.controls.seasonclock then
 		self.controls.seasonclock:OnGainFocus()
 	end
 end
@@ -947,7 +1005,7 @@ function PlayerHud:CloseControllerInventory(...)
 	if self.controls.clock then
 		self.controls.clock:OnLoseFocus()
 	end
-	if SHOWSEASONCLOCK then
+	if SHOWSEASONCLOCK and self.controls.seasonclock then
 		self.controls.seasonclock:OnLoseFocus()
 	end
 end

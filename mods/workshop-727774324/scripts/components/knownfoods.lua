@@ -8,9 +8,9 @@ end
 
 local KnownFoods = Class(function(self)
   self._dtag = 0.5
-  self._basiccooker = 'cookpot'
+  self._basicCooker = 'cookpot'
   self._cooker = {} -- openned cooker inst
-  self._cookername = self._basiccooker
+  self._cookerName = self._basicCooker
   self._config = {} -- mod config goes in here onafterload
   self._knownfoods = {} -- enchanced format recipes
   self._loadedfoods = {} -- loaded recipe data
@@ -18,6 +18,7 @@ local KnownFoods = Class(function(self)
   self._ingredients = {} -- all known ingredients
   self._alltags = {} -- all known tags
   self._allnames = {} -- all known names
+  self._SPICE_PREFIX = 'spice_'
 
   self._aliases = {
     cookedsmallmeat = "smallmeat_cooked",
@@ -73,7 +74,7 @@ end
 
 function KnownFoods:SetCooker(inst)
   self._cooker = inst
-  self._cookername = inst.prefab
+  self._cookerName = inst.prefab
 end
 
 -- pcall wrapper, returns:
@@ -181,30 +182,31 @@ function KnownFoods:OnAfterLoad(config)
   self:_FillIngredients()
 
   self._cookerRecipes = {}
-  for cookername,recipes in pairs(self._Cooking.recipes) do
-    for foodname,recipe in pairs(recipes) do
-      self._cookerRecipes[foodname] = recipe
-      self._cookerRecipes[foodname].cookername = cookername
+  for cookerName,recipes in pairs(self._Cooking.recipes) do
+    for foodName,recipe in pairs(recipes) do
+      self._cookerRecipes[foodName] = self._cookerRecipes[foodName] or recipe
+      self._cookerRecipes[foodName].supportedCookers = self._cookerRecipes[foodName].supportedCookers or {}
+      self._cookerRecipes[foodName].supportedCookers[cookerName] = true
     end
   end
 
   -- parse recipes from the raw cookbook
-  for foodname, recipe in pairs(self._cookerRecipes) do
+  for foodName, recipe in pairs(self._cookerRecipes) do
     local rawRecipe = self:_SmartSearch(recipe.test)
-    if rawRecipe and self:MinimizeRecipe(foodname, rawRecipe) then
-      self._knownfoods[foodname] = rawRecipe
+    if rawRecipe and self:MinimizeRecipe(foodName, rawRecipe) then
+      self._knownfoods[foodName] = rawRecipe
     end
   end
 
   -- then apply loaded recipe data to parsed recipes
-  for foodname, recipe in pairs(self._loadedfoods) do
-    if self._cookerRecipes[foodname] then
+  for foodName, recipe in pairs(self._loadedfoods) do
+    if self._cookerRecipes[foodName] then
       for param, value in pairs(recipe) do
-        self._knownfoods[foodname][param] = value
+        self._knownfoods[foodName][param] = value
       end
     else
       -- validate recipe existence
-      print("Craft Pot ~~~ Could not find global recipe for "..foodname)
+      print("Craft Pot ~~~ Could not find global recipe for "..foodName)
     end
   end
 end
@@ -222,11 +224,16 @@ function KnownFoods:_SmartSearch(test)
   local recipe = {tags={},names={}}
 
   local access_list = {} -- list of {type='names'/'tags', field={field}}
+  local isSpicedFoodRecipe = false
 
   setmetatable(names_proxy, {__index=function(t,field)
     if self._ingredients[field] then
       table.insert(access_list, {type='names',field=field})
       return names[field]
+    elseif string.find(tostring(field), self._SPICE_PREFIX) == 1 or self._cookerRecipes[field] then
+      -- if we find some recipe name in the recipe, then it is probably food+spice and should not be added
+      isSpicedFoodRecipe = true
+      return nil
     else
       print("CraftPot ~ detected invalid ingredient ["..field.."] in one of the recipes.")
       return nil
@@ -248,7 +255,9 @@ function KnownFoods:_SmartSearch(test)
     access_list = {}
     result = self:_ptest(test,names_proxy,tags_proxy)
 
-    if result == 1 then
+    if isSpicedFoodRecipe then
+      return false
+    elseif result == 1 then
       return self:_RawToSimple(names,tags)
     elseif result == -3 or #access_list == 0 then -- test returned unknown error or no access
       print ("Could not find recipe, unknown error"..result)
@@ -597,7 +606,6 @@ function KnownFoods:UpdateRecipe(recipe, ingdata)
   recipe.reqsmatch = false -- all the min requirements are met
   recipe.reqsmismatch = false -- all the max requirements are met
   recipe.readytocook = false -- all ingredients match recipe and cookpot is loaded
-  recipe.specialcooker = recipe.cookername ~= self._basiccooker -- does the recipe require special cooker
   recipe.unlocked = not self._config.lock_uncooked or recipe.times_cooked and recipe.times_cooked > 0
 
   if not self:_TestMax(recipe.name, ingdata.names, ingdata.tags) then

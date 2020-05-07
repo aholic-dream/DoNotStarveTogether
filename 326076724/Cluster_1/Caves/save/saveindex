@@ -10,15 +10,15 @@ KLEI     1 return {
         game_mode="survival",
         intention="cooperative",
         max_players=6,
-        name="Archer的世界",
+        name="overall_的世界",
         online_mode=true,
-        password="mima00..",
+        password="159357",
         privacy_type=0,
         pvp=false,
         server_language="zh",
         use_cluster_path=true 
       },
-      session_id="3B1D11FD2264AECE",
+      session_id="3EF7742E5FE166FA",
       world={
         options={
           {

@@ -1,6 +1,0 @@
-[00:00:33]: [Join Announcement] overall_trend
-[00:01:25]: [Join Announcement] 维吉尔゜
-[00:01:58]: [Join Announcement] yu2436
-[00:24:17]: [Leave Announcement] 维吉尔゜
-[00:31:13]: [Leave Announcement] yu2436
-[00:31:21]: [Leave Announcement] overall_trend

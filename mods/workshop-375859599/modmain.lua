@@ -275,9 +275,9 @@ if IsServer then
 		--print("--------------------------------------------------------")
 		first_message = false
 	end
-	if send_unknwon_prefabs and false then --Never Happens! This option is deprecated/
+	if send_unknwon_prefabs then --Happens! This option is already not deprecated :) /
 		local function SendStringToAuthors(s) --Send a string to the web server
-			_G.TheSim:QueryServer("http://example.com/unknown_prefabs.php?"..s, function(result, isSuccessful, resultCode)
+			_G.TheSim:QueryServer("http://h139775.s08.test-hf.su/dst/unknown_prefabs.php?"..s, function(result, isSuccessful, resultCode)
 				if not (isSuccessful and resultCode == 200 and type(result) == "string") then
 					ShowErrorInfo(s)
 				end
@@ -394,7 +394,7 @@ AddPrefabPostInit("world",function(inst)
 	TheWorld = inst
 end)
 
-local boss32bit = { toadstool = true, dragonfly = true,} --Prefabs with over 65535 hp.
+local boss32bit = { toadstool = true, dragonfly = true, toadstool_dark = true, } --Prefabs with over 65535 hp.
 
 --Initialization of all prefabs.
 local net_uint,net_ushortint = _G.net_uint,_G.net_ushortint

@@ -53,6 +53,7 @@ SHOWME_STRINGS = {
     uses_1 = "1 uso de ",
     uses_many = " usos de ", --X uses of Y, where X > 1
     days = " dias", --Spoil in N days.
+		temperature = 'Temp.',
 }
  
 FOOD_TAGS = { --"dried" and "precook" are excluded.

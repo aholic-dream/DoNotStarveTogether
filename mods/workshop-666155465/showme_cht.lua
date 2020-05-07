@@ -75,6 +75,7 @@ SHOWME_STRINGS = {
 	uses_1 = "1 次可使用, 總次數 ", --#overide#
 	uses_many = " 次可使用, 總次數 ", --#overide# X uses of Y, where X > 1
 	days = " 天", --Spoil in N days.
+	temperature = '溫度',
 }
 
 --Food tags are in genitive case.
