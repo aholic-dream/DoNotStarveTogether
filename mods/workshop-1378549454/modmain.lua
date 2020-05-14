@@ -1,5 +1,5 @@
 --[[
-Copyright (C) 2018 Zarklord
+Copyright (C) 2018-2020 Zarklord
 
 This file is part of Gem Core.
 
@@ -9,84 +9,111 @@ The source code is shared for referrence and academic purposes
 with the hope that people can read and learn from it. This is not
 Free and Open Source software, and code is not redistributable
 without permission of the author. Read the RECEX SHARED
-SOURCE LICENSE for details 
+SOURCE LICENSE for details
 The source codes does not come with any warranty including
-the implied warranty of merchandise. 
+the implied warranty of merchandise.
 You should have received a copy of the RECEX SHARED SOURCE
 LICENSE in the form of a LICENSE file in the root of the source
-directory. If not, please refer to 
+directory. If not, please refer to
 <https://raw.githubusercontent.com/Recex/Licenses/master/SharedSourceLicense/LICENSE.txt>
 ]]
-
 local _G = GLOBAL
-local require = _G.require
 
---MODENV is DEPRECIATED
-_G.MODENV = env
-_G.GEMENV = env
+Assets = {
+    Asset("IMAGE", "images/gemdict_ui.tex"),
+    Asset("ATLAS", "images/gemdict_ui.xml"),
+}
 
---should be in both namespaces
-_G.UpvalueHacker = require("tools/upvaluehacker")
-_G.LocalVariableHacker = require("tools/localvariablehacker")
+local MakeGemFunction, DeleteGemFunction = gemrun("gemfunctionmanager")
 
-local CustomTechTree = require("tools/customtechtree")
+gemrun("memspikefix")
+gemrun("tools/customtechtree")
+gemrun("tools/krampednaughtiness")
+gemrun("tools/componentspoofer")
+gemrun("tools/runtimecomponents")
+gemrun("tools/soundmanager")
+gemrun("tools/specialprefabspawner")
+gemrun("gemdictionary/gemdict")
+_G.GetNextTickPosition, _G.DoFakePhysicsWallMovement = gemrun("tools/physicscollisions")
+_G.AddShardRPCHandler, _G.SendShardRPC, _G.SendShardRPCToServer = gemrun("tools/shardrpc")
+_G.AddClientRPCHandler, _G.SendClientRPC = gemrun("tools/clientrpc")
+local AddGetSet, RemoveGetSet = gemrun("tools/globalmetatable")
 
-local AddNaughtinessFor = require("tools/krampednaughtiness")
-
---EntityScript namepsace only
-local AddSpoofedReplicableComponent = require("tools/componentspoofer")
-
---only needs to be in the global namespace except for AddShardComponent
-local AddShardComponent = require("tools/shardrpc")
-AddShardComponent("shard_report")
-
-require("mathutils")
-require("tableutils")
-_G.bit = require("bit")
-
---we gonna do do some interesting stuff with this
-local MiscStuff = require("tools/misc")
-
-require("memspikefix")
-
-require("tools/physicscollisions")
-
-require("tools/soundmanager")
-
-require("globalpause_patches")
-
-_G.GlobalMetatable = require("tools/globalmetatable")
+local MiscStuff = gemrun("tools/misc")
 
 for k, v in pairs(MiscStuff.Global) do
 	GLOBAL[k] = v
 end
 
-_G.SetupGemCoreEnv = function(enviroment)
-	_G.setfenv(1, enviroment or _G.getfenv(2))
-	env.UpvalueHacker = _G.UpvalueHacker
-    env.LocalVariableHacker = _G.LocalVariableHacker
-    env.CustomTechTree = CustomTechTree
-	env.AddSpoofedReplicableComponent = AddSpoofedReplicableComponent
-	env.AddShardComponent = AddShardComponent
-	env.bit = _G.bit
-    env.AddNaughtinessFor = AddNaughtinessFor
-    env.SetSoundAlias = _G.SetSoundAlias
-    env.GlobalMetatable = _G.GlobalMetatable
-	for k, v in pairs(MiscStuff.Local) do
-		env[k] = v
-	end
-end
+AddGetSet("TheLocalPlayer", function(t, n)
+    return not _G.TheNet:IsDedicated() and _G.ThePlayer or nil
+end, nil, true)
 
-_G.SetupGemCoreEnv()
---after initializing, run beta fixes.
-if CurrentRelease.GreaterOrEqualTo("R08_ROT_TURNOFTIDES") then
-    modimport("gemscripts/betafixes")
+--[[
+_G.AddRecipePostInitAny(function(recipe)
+    local ingredient = recipe:FindAndConvertIngredient("poop")
+    if ingredient then
+        ingredient:AddDictionaryPrefab("guano")
+        --ingredient.allowmultipleprefabtypes = false
+    end
+end)
+--]]
+
+if _G.rawget(_G, "GLOBALPAUSE") then
+    gemrun("globalpause_patches")
+end
+gemrun("worldseedhelper")
+
+modimport("gemscripts/legacy_modmain")
+
+MakeGemFunction("extendenvironment", function(functionname, env, ...)
+    local gemrun = gemrun
+    _G.setfenv(1, env)
+    UpvalueHacker = gemrun("tools/upvaluehacker")
+    LocalVariableHacker = gemrun("tools/localvariablehacker")
+    bit = gemrun("bit")
+    DebugPrint = gemrun("tools/misc").Global.DebugPrint
+    minitraceback = gemrun("tools/misc").Global.minitraceback
+    DynamicTileManager = gemrun("tools/dynamictilemanager")
+    AddShardRPCHandler = _G.AddShardRPCHandler
+    AddClientRPCHandler = _G.AddClientRPCHandler
+    if modname then
+        gemrun("forcememspikefix", true)
+        function GetModModConfigData(optionname, modmodname, ...)
+            return _G.GetModModConfigData(optionname, modmodname, modname, ...)
+        end
+    else
+        GetModModConfigData = _G.GetModModConfigData
+    end
+end, true)
+
+local function DoModsPostInit(ModManager)
+    _G.global("MOD_POSTINIT")
+    _G.MOD_POSTINIT = 1
+    for i, mod in ipairs(ModManager.mods) do
+        ModManager.currentlyloadingmod = mod.modname
+        ModManager:InitializeModMain(mod.modname, mod, "modmainpostinit.lua")
+        ModManager.currentlyloadingmod = nil
+    end
 end
 
 local _InitializeModMain = _G.ModManager.InitializeModMain
-function _G.ModManager:InitializeModMain(modname, env, mainfile, ...)
+function _G.ModManager:InitializeModMain(_modname, env, mainfile, ...)
     if mainfile == "modmain.lua" then
-        env.SetupGemCoreEnv = function() _G.SetupGemCoreEnv(env) end
+        env.gemrun = gemrun
     end
-    return _InitializeModMain(self, modname, env, mainfile, ...)
+    if mainfile == "modmainpostinit.lua" and _modname == modname then
+        MakeGemFunction("gemfunctionmanager", function(functionname, ...) return MakeGemFunction, DeleteGemFunction end)
+    end
+    local rets = {_InitializeModMain(self, _modname, env, mainfile, ...)}
+    if mainfile == "modmain.lua" and #self.mods == #self.enabledmods then
+        DoModsPostInit(self)
+    end
+    return _G.unpack(rets)
+end
+
+DeleteGemFunction("gemfunctionmanager")
+
+if #_G.ModManager.mods == 1 then
+    DoModsPostInit(_G.ModManager)
 end

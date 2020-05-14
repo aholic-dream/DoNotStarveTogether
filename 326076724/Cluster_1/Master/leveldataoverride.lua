@@ -87,6 +87,7 @@ return {
     wildfires="default",
     winter="default",
     world_size="huge",
+    worldseed="",
     wormhole_prefab="wormhole" 
   },
   random_set_pieces={

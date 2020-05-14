@@ -3,6 +3,7 @@ KLEI     1 return {
   slots={
     {
       enabled_mods={
+        ["workshop-1207269058"]={ configuration_options={  }, enabled=true },
         ["workshop-1279875294"]={
           configuration_options={
             BIGGRIDSIZE=2,
@@ -23,6 +24,44 @@ KLEI     1 return {
             SHOWTILE=false,
             SMALLGRIDSIZE=10,
             TIMEBUDGET=0.1 
+          },
+          enabled=true 
+        },
+        ["workshop-1378549454"]={
+          configuration_options={
+            ["MemSpikeFix:"]=false,
+            MemSpikeFixmaster_override=true,
+            ["MemSpikeFixworkshop-1207269058"]="default",
+            ["MemSpikeFixworkshop-1279875294"]="default",
+            ["MemSpikeFixworkshop-1595631294"]="default",
+            ["MemSpikeFixworkshop-347079953"]="default",
+            ["MemSpikeFixworkshop-351325790"]="default",
+            ["MemSpikeFixworkshop-356398534"]="default",
+            ["MemSpikeFixworkshop-362175979"]="default",
+            ["MemSpikeFixworkshop-365119238"]="default",
+            ["MemSpikeFixworkshop-374550642"]="default",
+            ["MemSpikeFixworkshop-375850593"]="default",
+            ["MemSpikeFixworkshop-375859599"]="default",
+            ["MemSpikeFixworkshop-376108724"]="default",
+            ["MemSpikeFixworkshop-376333686"]="default",
+            ["MemSpikeFixworkshop-378160973"]="default",
+            ["MemSpikeFixworkshop-380423963"]="default",
+            ["MemSpikeFixworkshop-382177939"]="default",
+            ["MemSpikeFixworkshop-396026892"]="default",
+            ["MemSpikeFixworkshop-444235588"]="default",
+            ["MemSpikeFixworkshop-458940297"]="default",
+            ["MemSpikeFixworkshop-466732225"]="default",
+            ["MemSpikeFixworkshop-483347719"]="default",
+            ["MemSpikeFixworkshop-503187227"]="default",
+            ["MemSpikeFixworkshop-543945797"]="default",
+            ["MemSpikeFixworkshop-609051112"]="default",
+            ["MemSpikeFixworkshop-666155465"]="default",
+            ["MemSpikeFixworkshop-727774324"]="default",
+            ["MemSpikeFixworkshop-758532836"]="default",
+            ["MemSpikeFixworkshop-780009141"]="default",
+            ["MemSpikeFixworkshop-890028129"]="default",
+            ["MemSpikeFixworkshop-956206484"]="default",
+            craftinghighlight=false 
           },
           enabled=true 
         },
@@ -68,7 +107,6 @@ KLEI     1 return {
           },
           enabled=true 
         },
-        ["workshop-396026892"]={ configuration_options={ OPT_DIFFICULTY=1 }, enabled=true },
         ["workshop-458940297"]={
           configuration_options={
             DFV_ClientPrediction="default",
@@ -119,7 +157,7 @@ KLEI     1 return {
         game_mode="survival",
         intention="cooperative",
         max_players=6,
-        name="overall_的世界",
+        name="overall_trend的世界",
         online_mode=true,
         password="159357",
         privacy_type=0,
@@ -218,6 +256,7 @@ KLEI     1 return {
               wildfires="default",
               winter="default",
               world_size="huge",
+              worldseed="",
               wormhole_prefab="wormhole" 
             },
             random_set_pieces={
@@ -248,24 +287,25 @@ KLEI     1 return {
           },
           {
             background_node_range={ 0, 1 },
-            desc="探查洞穴…… 一起！",
+            desc="更黑、更多蜘蛛的洞穴体验。",
             hideminimap=false,
-            id="DST_CAVE",
+            id="DST_CAVE_PLUS",
             location="cave",
             max_playlist_position=999,
             min_playlist_position=0,
-            name="洞穴",
+            name="更多洞穴",
             numrandom_set_pieces=0,
             override_level_string=false,
             overrides={
               banana="default",
               bats="default",
-              berrybush="default",
-              boons="default",
+              berrybush="rare",
+              boons="often",
               branching="default",
               bunnymen="default",
+              carrot="rare",
               cave_ponds="default",
-              cave_spiders="default",
+              cave_spiders="often",
               cavelight="default",
               chess="default",
               disease_delay="default",
@@ -273,7 +313,7 @@ KLEI     1 return {
               fern="default",
               fissure="default",
               flint="default",
-              flower_cave="default",
+              flower_cave="rare",
               grass="default",
               layout_mode="RestrictNodesByKey",
               lichen="default",
@@ -284,6 +324,7 @@ KLEI     1 return {
               mushroom="default",
               mushtree="default",
               prefabswaps_start="default",
+              rabbits="rare",
               reeds="default",
               regrowth="default",
               roads="never",
@@ -300,9 +341,10 @@ KLEI     1 return {
               trees="default",
               weather="default",
               world_size="default",
+              worldseed="",
               wormattacks="default",
               wormhole_prefab="tentacle_pillar",
-              wormlights="default",
+              wormlights="rare",
               worms="default" 
             },
             required_prefabs={ "multiplayer_portal" },

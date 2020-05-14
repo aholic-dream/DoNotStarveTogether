@@ -22,6 +22,10 @@ directory. If not, please refer to
 --[[ Shard_Report ]]
 --------------------------------------------------------------------------
 
+local AddShardReportDataFn, GetShardReportDataFromWorld = gemrun("shardreportdata")
+local MakeGemFunction = gemrun("gemfunctionmanager")
+MakeGemFunction("shardreportdata", function(functionname, ...) return AddShardReportDataFn end)
+
 return Class(function(self, inst)
 
 assert(TheWorld.ismastersim, "Shard_Report should not exist on client")
@@ -80,15 +84,15 @@ end or nil
 
 local ReportShardData = not _ismastershard and function(inst)
     SHARD_LIST[mastershardID:value()] = loadstring(mastershardData:value())()
-    SendShardRPCToServer(SHARD_RPC.GemCore.ShardReportInfo, TheShard:GetShardId(), GetShardReportDataFromWorld({tags = {}}))
+    SendShardRPCToServer(SHARD_RPC.GemCore.ShardReportInfo, TheShard:GetShardId(), GetShardReportDataFromWorld())
 end or nil
 
 local once = 0
-local old_Shard_UpdateWorldState = Shard_UpdateWorldState
+local _Shard_UpdateWorldState = Shard_UpdateWorldState
 Shard_UpdateWorldState = _ismastershard and function(world_id, state, tags, world_data)
     if once == 0 then
         mastershardID:set(tonumber(SHARDID.MASTER))
-        mastershardData:set(DataDumper(GetShardReportDataFromWorld({tags = {}}), nil, true))
+        mastershardData:set(DataDumper(GetShardReportDataFromWorld(), nil, true))
         SHARD_LIST[mastershardID:value()] = loadstring(mastershardData:value())()
         once = 1
     end
@@ -102,8 +106,8 @@ Shard_UpdateWorldState = _ismastershard and function(world_id, state, tags, worl
             end
         end
     end
-    old_Shard_UpdateWorldState(world_id, state, tags, world_data)
-end or old_Shard_UpdateWorldState
+    _Shard_UpdateWorldState(world_id, state, tags, world_data)
+end or _Shard_UpdateWorldState
 
 --------------------------------------------------------------------------
 --[[ Initialization ]]

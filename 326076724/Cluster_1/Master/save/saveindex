@@ -10,7 +10,7 @@ KLEI     1 return {
         game_mode="survival",
         intention="cooperative",
         max_players=6,
-        name="overall_的世界",
+        name="overall_trend的世界",
         online_mode=true,
         password="159357",
         privacy_type=0,
@@ -18,7 +18,7 @@ KLEI     1 return {
         server_language="zh",
         use_cluster_path=true 
       },
-      session_id="14DB32F5FB203AC7",
+      session_id="2AC23CC483624546",
       world={
         options={
           {
@@ -110,6 +110,7 @@ KLEI     1 return {
               wildfires="default",
               winter="default",
               world_size="huge",
+              worldseed="",
               wormhole_prefab="wormhole" 
             },
             random_set_pieces={

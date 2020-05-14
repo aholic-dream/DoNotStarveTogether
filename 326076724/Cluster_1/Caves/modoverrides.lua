@@ -1,4 +1,5 @@
 return {
+  ["workshop-1207269058"]={ configuration_options={  }, enabled=true },
   ["workshop-1279875294"]={
     configuration_options={
       BIGGRIDSIZE=2,
@@ -19,6 +20,44 @@ return {
       SHOWTILE=false,
       SMALLGRIDSIZE=10,
       TIMEBUDGET=0.1 
+    },
+    enabled=true 
+  },
+  ["workshop-1378549454"]={
+    configuration_options={
+      ["MemSpikeFix:"]=false,
+      MemSpikeFixmaster_override=true,
+      ["MemSpikeFixworkshop-1207269058"]="default",
+      ["MemSpikeFixworkshop-1279875294"]="default",
+      ["MemSpikeFixworkshop-1595631294"]="default",
+      ["MemSpikeFixworkshop-347079953"]="default",
+      ["MemSpikeFixworkshop-351325790"]="default",
+      ["MemSpikeFixworkshop-356398534"]="default",
+      ["MemSpikeFixworkshop-362175979"]="default",
+      ["MemSpikeFixworkshop-365119238"]="default",
+      ["MemSpikeFixworkshop-374550642"]="default",
+      ["MemSpikeFixworkshop-375850593"]="default",
+      ["MemSpikeFixworkshop-375859599"]="default",
+      ["MemSpikeFixworkshop-376108724"]="default",
+      ["MemSpikeFixworkshop-376333686"]="default",
+      ["MemSpikeFixworkshop-378160973"]="default",
+      ["MemSpikeFixworkshop-380423963"]="default",
+      ["MemSpikeFixworkshop-382177939"]="default",
+      ["MemSpikeFixworkshop-396026892"]="default",
+      ["MemSpikeFixworkshop-444235588"]="default",
+      ["MemSpikeFixworkshop-458940297"]="default",
+      ["MemSpikeFixworkshop-466732225"]="default",
+      ["MemSpikeFixworkshop-483347719"]="default",
+      ["MemSpikeFixworkshop-503187227"]="default",
+      ["MemSpikeFixworkshop-543945797"]="default",
+      ["MemSpikeFixworkshop-609051112"]="default",
+      ["MemSpikeFixworkshop-666155465"]="default",
+      ["MemSpikeFixworkshop-727774324"]="default",
+      ["MemSpikeFixworkshop-758532836"]="default",
+      ["MemSpikeFixworkshop-780009141"]="default",
+      ["MemSpikeFixworkshop-890028129"]="default",
+      ["MemSpikeFixworkshop-956206484"]="default",
+      craftinghighlight=false 
     },
     enabled=true 
   },
@@ -64,7 +103,6 @@ return {
     },
     enabled=true 
   },
-  ["workshop-396026892"]={ configuration_options={ OPT_DIFFICULTY=1 }, enabled=true },
   ["workshop-458940297"]={
     configuration_options={
       DFV_ClientPrediction="default",
